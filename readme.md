@@ -1,7 +1,17 @@
-# Vanilla JavaScript App
+# Custom Entra authentication with Azure Static Web Apps (SWA)
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build JavaScript apps in minutes. Use this repo with the [quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=vanilla-javascript) to build and customize a new static site.
+- Configuration specified in: `src/staticwebapp.config.json`
+   - You must configure the `openIdIssuer` to match your own tenant ID.
+   - The `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET_APP_SETTING_NAME` configuration reference keys you must specify in your SWA [Environment Variables](https://learn.microsoft.com/en-us/azure/static-web-apps/application-settings). 
+- Uses the custom authentication feature of SWA: https://learn.microsoft.com/en-us/azure/static-web-apps/authentication-custom?tabs=aad%2Cinvitations
 
-This repo is used as a starter for a _very basic_ HTML web application using no front-end frameworks.
+- Entra App Registration:
+   - An Entra App Registration must be created: https://learn.microsoft.com/en-us/azure/app-service/configure-authentication-provider-aad?tabs=workforce-configuration
+   - The App Registration is configured with:
+        - A "platform" of `Web` with a redirect URL of `https://<Your-SWA-FQDN/.auth/login/aad/callback`
+        - Under `Select the tokens you would like to be issued...` select the option: `ID tokens (used for implicit and hybrid flows)`.  The token requirements will vary depending on your use case.
 
-This repo has a dev container. This means if you open it inside a [GitHub Codespace](https://github.com/features/codespaces), or using [VS Code with the remote containers extension](https://code.visualstudio.com/docs/remote/containers), it will be opened inside a container with all the dependencies already installed.
+   - Optionally, configuring the App to restrict to a set of users: https://learn.microsoft.com/en-us/entra/identity-platform/howto-restrict-your-app-to-a-set-of-users
+   - Optionally, grant tenant-wide admin consent to the App: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/grant-admin-consent?pivots=portal
+
+- General: Microsoft Learn module for SWA with authentication: https://learn.microsoft.com/en-us/training/modules/publish-static-web-app-authentication/
