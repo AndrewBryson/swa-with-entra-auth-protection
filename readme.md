@@ -1,5 +1,6 @@
 # Custom Entra authentication with Azure Static Web Apps (SWA)
 
+- Custom auth in SWA requires a Standard Hosting plan.
 - Configuration specified in: `src/staticwebapp.config.json`
    - You must configure the `openIdIssuer` to match your own tenant ID.
    - The `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET_APP_SETTING_NAME` configuration reference keys you must specify in your SWA [Environment Variables](https://learn.microsoft.com/en-us/azure/static-web-apps/application-settings). 
